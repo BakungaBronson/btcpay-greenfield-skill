@@ -1,0 +1,7 @@
+{
+  "host": "https://your.btcpay.tld",
+  "store_id": "REPLACE_WITH_STORE_ID",
+  "default_currency": "USD",
+  "subscribed_events": ["InvoiceSettled", "InvoicePaymentSettled"],
+  "_note": "Secrets (api_key, webhook_secret) do NOT belong here. Keep them in environment variables / .env so they never land in source control."
+}
