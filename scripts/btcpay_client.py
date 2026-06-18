@@ -180,6 +180,12 @@ class BTCPayClient:
 
         Costs one GET .../payment-methods. Worth it before moving money: it turns
         the "BTC-CHAIN doesn't exist here" 400 into a clear, upfront error.
+
+        CAVEAT for refunds/payouts: this lists what the store can RECEIVE, which
+        isn't necessarily what it can SEND. A store may accept Lightning via a
+        node it can't pay out from, so an auto-picked BTC-LN refund there is
+        unpayable. When your send capability differs from receive, pass
+        `preferred` explicitly (e.g. "ARKADE" on the public demo).
         """
         enabled = self.enabled_payment_methods(store_id)
         if not enabled:

@@ -160,6 +160,14 @@ already avoid them; preserve these properties when you adapt them.
   claims. To actually *pay* a claimed Lightning refund the store needs a payout
   source (a Lightning automated payout processor, or the owner approves+sends
   manually). With no processor, claims sit in Payouts awaiting approval.
+- **Receiving a method ≠ being able to pay it out.** The methods a store accepts
+  on invoices are not the same as what it can *settle a payout/refund* with. A
+  store can take Lightning via a shared/custodial node it can't send from, so a
+  `BTC-LN` refund there is unpayable and stays stuck in "Awaiting approval".
+  `resolve_payment_method` picks from *receiving* methods (Lightning-first), so
+  for refunds/payouts confirm the store can actually send via that method — pass
+  `payment_method` explicitly otherwise. (On the public demo, refunds must use
+  `ARKADE`, not `BTC-LN`, because there's no node you control to send Lightning.)
 - **Overpayment.** Check `additionalStatus == "PaidOver"` (or the settled
   event's `overPaid`) if you need to handle refunding the difference.
 
